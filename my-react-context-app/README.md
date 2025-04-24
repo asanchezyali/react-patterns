@@ -1,12 +1,76 @@
-# 🌱 React Context · Provider Pattern · Custom Hook 🌿
+# React Context Pattern Example
 
-Si deseas tener este proyecto en tu local:
+This project demonstrates the implementation of React's Context API along with custom hooks, showcasing a practical notification system.
 
-1. Clona este repo.
-2. Instala las dependencias con `npm install`.
-3. Corre el proyecto con `npm run dev`.
-4. Ve al navegador y abre `http://localhost:5173/`.
+## Features
 
-Este es el resultado que verás en el navegador:
+- **Global Notification System**: Manage notifications across your application
+- **Custom Hook Pattern**: `useNotification` hook for easy access to notification context
+- **TypeScript Support**: Fully typed implementation
+- **Auto-dismiss**: Notifications automatically dismiss after 3 seconds
 
-<img width="1728" alt="Screenshot 2024-10-22 at 12 47 20 PM" src="https://github.com/user-attachments/assets/f5b83508-7f42-4eed-af53-db2ea908f4d0">
+## Key Concepts Demonstrated
+
+### Context Provider
+- Creation of a typed context using `createContext`
+- Provider pattern implementation
+- State management within context
+
+### Custom Hook
+- Encapsulated context consumption
+- Type-safe hook implementation
+- Error handling for usage outside provider
+
+## Project Structure
+
+```
+src/
+├── contexts/
+│   └── NotificationContext.tsx    # Context definition and provider
+├── hooks/
+│   └── useNotification.ts        # Custom hook for using notifications
+├── components/
+│   ├── Notification.tsx          # Notification display component
+│   └── NotificationButton.tsx    # Component to trigger notifications
+└── App.tsx                       # Main application component
+```
+
+## Usage Example
+
+```tsx
+import { useNotification } from './hooks/useNotification';
+
+function MyComponent() {
+  const { showNotification } = useNotification();
+
+  const handleClick = () => {
+    showNotification('Hello from Context!');
+  };
+
+  return (
+    <button onClick={handleClick}>
+      Show Notification
+    </button>
+  );
+}
+```
+
+## Getting Started
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+3. Visit `http://localhost:5173` in your browser
+
+## Key Learnings
+- How to implement type-safe context in React
+- Proper context provider patterns
+- Custom hook creation and usage
+- Performance considerations with Context

@@ -1,50 +1,79 @@
-# React + TypeScript + Vite
+# Zustand Pattern Example
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project demonstrates state management using Zustand, a lightweight alternative to Redux, with TypeScript integration.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Simple Store Setup**: Minimalistic state management
+- **Persistence**: Data persistence with zustand/middleware
+- **Type Safety**: Full TypeScript integration
+- **Middleware Usage**: Error handling and persistence middleware
+- **Immutable Updates**: Proper state update patterns
 
-## Expanding the ESLint configuration
+## Key Concepts Demonstrated
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Store Configuration
+- Basic store setup with TypeScript
+- Middleware integration
+- Action creators
+- Persistence configuration
 
-- Configure the top-level `parserOptions` property like this:
+### State Management
+- Immutable state updates
+- Error handling
+- Loading states
+- Type-safe selectors
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Project Structure
+
+```
+src/
+├── store/
+│   └── useTodoStore.ts    # Zustand store with todos logic
+├── components/
+│   └── TodoList.tsx       # Todo list component
+└── App.tsx               # Main application
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Usage Example
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+```tsx
+import { useTodoStore } from './store/useTodoStore';
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+function TodoComponent() {
+  const { todos, addTodo, removeTodo } = useTodoStore();
+
+  return (
+    <div>
+      <button onClick={() => addTodo('New Task')}>Add Todo</button>
+      {todos.map(todo => (
+        <div key={todo.id}>
+          {todo.text}
+          <button onClick={() => removeTodo(todo.id)}>Delete</button>
+        </div>
+      ))}
+    </div>
+  );
+}
 ```
+
+## Getting Started
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+3. Visit `http://localhost:5173` in your browser
+
+## Key Learnings
+- Zustand store configuration
+- State persistence strategies
+- TypeScript integration
+- Middleware usage
+- Performance considerations with Zustand
