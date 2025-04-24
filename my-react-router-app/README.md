@@ -1,50 +1,77 @@
-# React + TypeScript + Vite
+# React Router Pattern Example
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project demonstrates modern routing patterns in React using React Router v6, showcasing protected routes, navigation, and route parameters.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Route Protection**: Implementation of protected routes with authentication
+- **Nested Routes**: Demonstration of route nesting
+- **Dynamic Routes**: Usage of URL parameters
+- **Active Link Styling**: Visual indication of current route
+- **Type-Safe Routing**: Full TypeScript support
 
-## Expanding the ESLint configuration
+## Key Concepts Demonstrated
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Route Configuration
+- Basic routing setup
+- Protected route implementation
+- 404 handling
+- Route parameters
 
-- Configure the top-level `parserOptions` property like this:
+### Navigation
+- Link and NavLink usage
+- Programmatic navigation
+- Active route styling
+- Location-based UI updates
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── Dashboard.tsx       # Dashboard with nested routes
+│   ├── Home.tsx           # Home page component
+│   ├── Product.tsx        # Dynamic route example
+│   ├── Profile.tsx        # Protected route example
+│   ├── NotFound.tsx       # 404 page
+│   └── ProtectedRoute.tsx # Route protection wrapper
+└── App.tsx               # Main routing configuration
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Usage Example
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+```tsx
+// Protected Route Example
+<Route 
+  path="/profile" 
+  element={
+    <ProtectedRoute isAuthenticated={isAuthenticated}>
+      <Profile />
+    </ProtectedRoute>
+  }
+/>
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+// Dynamic Route Example
+<Route path="/product/:id" element={<Product />} />
 ```
+
+## Getting Started
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+3. Visit `http://localhost:5173` in your browser
+
+## Key Learnings
+- Modern React Router v6 patterns
+- Route protection strategies
+- Navigation best practices
+- TypeScript integration with routing
+- Route-based code splitting
